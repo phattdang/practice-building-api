@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
+import java.util.List;
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -23,4 +25,29 @@ public class Building {
     String name;
     String street;
     String ward;
+
+    @ManyToOne
+    @JoinColumn(name = "districtid")
+    District district;
+
+    @Column(name = "numberofbasement")
+    Integer numberOfBasement;
+
+    @Column(name = "floorarea")
+    Integer floorArea;
+
+    @Column(name = "rentprice")
+    Integer rentPrice;
+
+    @Column(name = "rentpricedescription")
+    String rentPriceDescription;
+
+    @Column(name = "managername")
+    String managerName;
+
+    @Column(name = "managerphonenumber")
+    String managerPhoneNumber;
+
+    @OneToMany(mappedBy = "building")
+    List<RentArea> rentAreas;
 }
