@@ -1,9 +1,9 @@
 package fit.iuh.se.buildingapi.service;
 
-import fit.iuh.se.buildingapi.dto.response.BuildingReponse;
+import fit.iuh.se.buildingapi.dto.response.BuildingResponse;
 
 import java.util.List;
 
 public interface BuildingService {
-    List<BuildingReponse> getAllBuidings();
+    List<BuildingResponse> getAllBuidings();
 }
