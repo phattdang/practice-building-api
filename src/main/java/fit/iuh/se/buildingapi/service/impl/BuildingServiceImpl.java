@@ -1,6 +1,6 @@
 package fit.iuh.se.buildingapi.service.impl;
 
-import fit.iuh.se.buildingapi.dto.response.BuildingReponse;
+import fit.iuh.se.buildingapi.dto.response.BuildingResponse;
 import fit.iuh.se.buildingapi.mapper.BuildingMapper;
 import fit.iuh.se.buildingapi.repository.BuildingRepository;
 import fit.iuh.se.buildingapi.service.BuildingService;
@@ -20,7 +20,7 @@ public class BuildingServiceImpl implements BuildingService {
     BuildingRepository buildingRepository;
     BuildingMapper buildingMapper;
     @Override
-    public List<BuildingReponse> getAllBuidings() {
+    public List<BuildingResponse> getAllBuidings() {
         return buildingRepository.findAll()
                 .stream()
                 .map(buildingMapper::toBuildingReponse)
