@@ -1,6 +1,6 @@
 package fit.iuh.se.buildingapi.controller;
 
-import fit.iuh.se.buildingapi.dto.response.BuildingReponse;
+import fit.iuh.se.buildingapi.dto.response.BuildingResponse;
 import fit.iuh.se.buildingapi.service.BuildingService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +20,7 @@ public class BuildingController {
     BuildingService buildingService;
 
     @GetMapping
-    List<BuildingReponse> getAllBuidings(){
+    List<BuildingResponse> getAllBuidings(){
         return buildingService.getAllBuidings();
     }
 }
