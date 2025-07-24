@@ -10,7 +10,10 @@ public enum HttpCode {
     OK(200, "OK!"),
     CREATED(201, "Created Successfully!"),
     BAD_REQUEST(400, ""),
-    NOT_FOUND(404, "Not found!");
+    NOT_FOUND(404, "Not found!"),
+    INVALID_NAME(405, "Building name must be at least 8 chars"),
+    NAME_EXISTED(406, "Building name have been existed");
+
     final int CODE;
     final String MESSAGE;
 
