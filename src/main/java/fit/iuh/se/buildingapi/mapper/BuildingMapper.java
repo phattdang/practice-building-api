@@ -29,13 +29,14 @@ public class BuildingMapper {
         String address = building.getWard() + "," + building.getStreet() + "," + building.getDistrict().getName();
         buildingResponse.setAddress(address);
 
-        String rentArea = building.getRentAreas()
-                .stream()
-                .map(RentArea::getValue)
-                .map(String::valueOf)
-                .collect(Collectors.joining(","));
-
-        buildingResponse.setRentArea(rentArea);
+        if(building.getRentAreas() != null){
+            String rentArea = building.getRentAreas()
+                    .stream()
+                    .map(RentArea::getValue)
+                    .map(String::valueOf)
+                    .collect(Collectors.joining(","));
+            buildingResponse.setRentArea(rentArea);
+        }
 
         return buildingResponse;
     }
