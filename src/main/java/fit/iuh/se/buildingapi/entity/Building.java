@@ -1,6 +1,7 @@
 package fit.iuh.se.buildingapi.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Size;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
@@ -50,4 +51,7 @@ public class Building {
 
     @OneToMany(mappedBy = "building")
     List<RentArea> rentAreas;
+
+    @OneToMany(mappedBy = "building")
+    List<BuildingRentType> buildingRentTypes;
 }
