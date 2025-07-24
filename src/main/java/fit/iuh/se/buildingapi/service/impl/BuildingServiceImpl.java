@@ -2,8 +2,11 @@ package fit.iuh.se.buildingapi.service.impl;
 
 import fit.iuh.se.buildingapi.dto.request.BuildingCreationRequest;
 import fit.iuh.se.buildingapi.dto.request.BuildingUpdationRequest;
+import fit.iuh.se.buildingapi.dto.response.ApiResponse;
 import fit.iuh.se.buildingapi.dto.response.BuildingResponse;
 import fit.iuh.se.buildingapi.entity.Building;
+import fit.iuh.se.buildingapi.entity.enums.HttpCode;
+import fit.iuh.se.buildingapi.exception.AppException;
 import fit.iuh.se.buildingapi.mapper.BuildingMapper;
 import fit.iuh.se.buildingapi.repository.BuildingRepository;
 import fit.iuh.se.buildingapi.service.BuildingService;
@@ -13,6 +16,7 @@ import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
@@ -24,8 +28,16 @@ public class BuildingServiceImpl implements BuildingService {
     BuildingMapper buildingMapper;
 
     @Override
-    public List<BuildingResponse> getAllBuidings() {
+    public List<BuildingResponse> getAllBuildings() {
         return buildingRepository.findAll()
+                .stream()
+                .map(buildingMapper::toBuildingReponse)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<BuildingResponse> getAllBuildingsV2(Map<String, Object> params) {
+        return buildingRepository.findAllBuildings(params)
                 .stream()
                 .map(buildingMapper::toBuildingReponse)
                 .collect(Collectors.toList());
@@ -34,6 +46,8 @@ public class BuildingServiceImpl implements BuildingService {
     @Override
     public BuildingResponse addBuilding(BuildingCreationRequest request) {
         Building building = buildingMapper.toBuilding(request);
+        if(buildingRepository.existsByName(request.getName()))
+            throw new AppException(HttpCode.NAME_EXISTED);
         return buildingMapper.toBuildingReponse(buildingRepository.save(building));
     }
 
